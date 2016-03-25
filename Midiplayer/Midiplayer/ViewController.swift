@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import CoreMIDI
+import AudioToolbox
 
 class ViewController: UIViewController {
-
+    
+    private var musicPlayer:MusicPlayer = nil
+    private var musicSequence:MusicSequence = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        
+        
+        
+        
+        
+//        NSString *midiFilePath = [[NSBundle mainBundle] pathForResource:name ofType:@"mid"];
+//        NSURL * midiFileURL = [NSURL fileURLWithPath:midiFilePath];
+        
     }
 
 

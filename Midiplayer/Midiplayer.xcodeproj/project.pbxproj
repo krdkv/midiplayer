@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D6D1D911CA57A8300ADE11A /* Bach Inv No 8.mid in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D8F1CA57A8300ADE11A /* Bach Inv No 8.mid */; };
+		2D6D1D951CA5AB3200ADE11A /* MidiPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D1D941CA5AB3200ADE11A /* MidiPlayer.m */; };
 		2D9512B11CA55E0B004CD162 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9512B01CA55E0B004CD162 /* AppDelegate.swift */; };
 		2D9512B31CA55E0B004CD162 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9512B21CA55E0B004CD162 /* ViewController.swift */; };
 		2D9512B61CA55E0B004CD162 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9512B41CA55E0B004CD162 /* Main.storyboard */; };
@@ -15,6 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D6D1D8F1CA57A8300ADE11A /* Bach Inv No 8.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = "Bach Inv No 8.mid"; sourceTree = "<group>"; };
+		2D6D1D921CA5AB3200ADE11A /* Midiplayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Midiplayer-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D6D1D931CA5AB3200ADE11A /* MidiPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiPlayer.h; sourceTree = "<group>"; };
+		2D6D1D941CA5AB3200ADE11A /* MidiPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MidiPlayer.m; sourceTree = "<group>"; };
 		2D9512AD1CA55E0B004CD162 /* Midiplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Midiplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9512B01CA55E0B004CD162 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D9512B21CA55E0B004CD162 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D6D1D8E1CA57A8300ADE11A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2D6D1D8F1CA57A8300ADE11A /* Bach Inv No 8.mid */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		2D9512A41CA55E0B004CD162 = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +68,16 @@
 		2D9512AF1CA55E0B004CD162 /* Midiplayer */ = {
 			isa = PBXGroup;
 			children = (
+				2D6D1D8E1CA57A8300ADE11A /* Resources */,
 				2D9512B01CA55E0B004CD162 /* AppDelegate.swift */,
 				2D9512B21CA55E0B004CD162 /* ViewController.swift */,
 				2D9512B41CA55E0B004CD162 /* Main.storyboard */,
 				2D9512B71CA55E0B004CD162 /* Assets.xcassets */,
 				2D9512B91CA55E0B004CD162 /* LaunchScreen.storyboard */,
 				2D9512BC1CA55E0B004CD162 /* Info.plist */,
+				2D6D1D931CA5AB3200ADE11A /* MidiPlayer.h */,
+				2D6D1D941CA5AB3200ADE11A /* MidiPlayer.m */,
+				2D6D1D921CA5AB3200ADE11A /* Midiplayer-Bridging-Header.h */,
 			);
 			path = Midiplayer;
 			sourceTree = "<group>";
@@ -74,6 +92,7 @@
 				2D9512A91CA55E0B004CD162 /* Sources */,
 				2D9512AA1CA55E0B004CD162 /* Frameworks */,
 				2D9512AB1CA55E0B004CD162 /* Resources */,
+				2D6D1D961CA5AE3300ADE11A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -123,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D9512BB1CA55E0B004CD162 /* LaunchScreen.storyboard in Resources */,
+				2D6D1D911CA57A8300ADE11A /* Bach Inv No 8.mid in Resources */,
 				2D9512B81CA55E0B004CD162 /* Assets.xcassets in Resources */,
 				2D9512B61CA55E0B004CD162 /* Main.storyboard in Resources */,
 			);
@@ -130,11 +150,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D6D1D961CA5AE3300ADE11A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2D9512A91CA55E0B004CD162 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D6D1D951CA5AB3200ADE11A /* MidiPlayer.m in Sources */,
 				2D9512B31CA55E0B004CD162 /* ViewController.swift in Sources */,
 				2D9512B11CA55E0B004CD162 /* AppDelegate.swift in Sources */,
 			);
@@ -251,11 +288,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Midiplayer/Frameworks",
+				);
 				INFOPLIST_FILE = Midiplayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickk.Midiplayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Midiplayer/Midiplayer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -263,11 +307,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Midiplayer/Frameworks",
+				);
 				INFOPLIST_FILE = Midiplayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickk.Midiplayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Midiplayer/Midiplayer-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -290,6 +340,7 @@
 				2D9512C11CA55E0B004CD162 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
