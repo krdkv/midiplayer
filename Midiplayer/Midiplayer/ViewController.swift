@@ -17,7 +17,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        midiPlayer.play()
+        if let midURL = NSBundle.mainBundle().pathForResource("Bach Inv No 8", ofType: "mid") {
+            let data = NSFileManager.defaultManager().contentsAtPath(midURL)
+            midiPlayer.loadMidiData(data)
+            
+            midiPlayer.tempo = 280
+            
+            midiPlayer.play()
+        }
+        
+        
+    }
+    
+    func tick() {
+        midiPlayer.tempo = 30
     }
 }
 

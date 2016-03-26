@@ -12,11 +12,15 @@
 #import <AVFoundation/AVFoundation.h>
 
 #define kPrefferedMaximumFramesPerSlice 4096
+#define kDefaultTempo 120
 
 @interface MidiPlayer() {
     AUGraph graph;
     AudioUnit leftUnit, rightUnit, metronomeUnit, mixerUnit, rioUnit;
-    
+    MusicPlayer musicPlayer;
+    MusicSequence musicSequence;
+    AUNode leftNode, rightNode, metronomeNode, mixerNode, rioNode;
+    UInt32 initialTempo;
 }
 
 @end
@@ -40,7 +44,6 @@
 
 - (void)setupGraph {
     OSStatus result = noErr;
-    AUNode leftNode, rightNode, metronomeNode, mixerNode, rioNode;
     
     AudioComponentDescription cd = {};
     cd.componentManufacturer     = kAudioUnitManufacturer_Apple;
@@ -88,14 +91,20 @@
     AudioUnitSetProperty (rioUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maximumFramesPerSlice, sizeof (maximumFramesPerSlice));
     
     AUGraphInitialize(graph);
-}
-
-- (void)play {
+    
     AUGraphStart(graph);
 }
 
+- (void)play {
+    if ( musicPlayer ) {
+        MusicPlayerStart(musicPlayer);
+    }
+}
+
 - (void)pause {
-    AUGraphStop(graph);
+    if ( musicPlayer ) {
+        MusicPlayerStop(musicPlayer);
+    }
 }
 
 - (BOOL)isPlaying {
@@ -105,7 +114,7 @@
 }
 
 - (void) loadSampleMaps {
-    NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"HPiano" ofType:@"aupreset"]];
+    NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"HPiano2" ofType:@"aupreset"]];
     [self loadMapForUrl:presetURL andUnit:leftUnit];
     [self loadMapForUrl:presetURL andUnit:rightUnit];
 }
@@ -131,7 +140,65 @@
 }
 
 - (void)loadMidiData:(NSData*)data {
+    [self pause];
     
+    if ( musicPlayer ) {
+        DisposeMusicPlayer(musicPlayer);
+    }
+    if ( musicSequence ) {
+        DisposeMusicSequence(musicSequence);
+    }
+    
+    NewMusicPlayer(&musicPlayer);
+    NewMusicSequence(&musicSequence);
+    MusicSequenceFileLoadData(musicSequence, (__bridge CFDataRef)data, kMusicSequenceFile_MIDIType, kMusicSequenceLoadSMF_PreserveTracks);
+    MusicPlayerSetSequence(musicPlayer, musicSequence);
+    
+    OSStatus status;
+    MusicTrack leftTrack;
+    status = MusicSequenceGetIndTrack(musicSequence, 0, &leftTrack);
+    
+    MusicTrack rightTrack;
+    status = MusicSequenceGetIndTrack(musicSequence, 1, &rightTrack);
+    
+    NSDictionary * dict = (__bridge NSDictionary*)MusicSequenceGetInfoDictionary(musicSequence);
+    if ( dict[@"tempo"] ) {
+        initialTempo = [dict[@"tempo"] intValue];
+    } else {
+        initialTempo = kDefaultTempo;
+    }
+    [self setTempo:initialTempo];
+    
+    MusicSequenceSetAUGraph(musicSequence, graph);
+    
+    MusicTrackSetDestNode(leftTrack, leftNode);
+    MusicTrackSetDestNode(rightTrack, rightNode);
+    
+    MusicPlayerStart(musicPlayer);
+}
+
+- (void)removeTempoEvents:(MusicTrack)track {
+    MusicEventIterator tempIter;
+    NewMusicEventIterator(track, &tempIter);
+    Boolean hasEvent;
+    MusicEventIteratorHasCurrentEvent(tempIter, &hasEvent);
+    while (hasEvent) {
+        MusicTimeStamp stamp;
+        MusicEventType type;
+        const void *data = NULL;
+        UInt32 sizeData;
+        
+        MusicEventIteratorGetEventInfo(tempIter, &stamp, &type, &data, &sizeData);
+        if (type == kMusicEventType_ExtendedTempo){
+            MusicEventIteratorDeleteEvent(tempIter);
+            MusicEventIteratorHasCurrentEvent(tempIter, &hasEvent);
+        }
+        else{
+            MusicEventIteratorNextEvent(tempIter);
+            MusicEventIteratorHasCurrentEvent(tempIter, &hasEvent);
+        }
+    }
+    DisposeMusicEventIterator(tempIter);
 }
 
 - (Float32)leftHandVolume {
@@ -183,11 +250,15 @@
 }
 
 - (UInt32)tempo {
-    return 120;
+    return initialTempo;
 }
 
 - (void)setTempo:(UInt32)tempo {
-    
+    MusicTrack tempoTrack;
+    MusicSequenceGetTempoTrack(musicSequence, &tempoTrack);
+    [self removeTempoEvents:tempoTrack];
+    MusicTrackNewExtendedTempoEvent(tempoTrack, 0, tempo);
+    initialTempo = tempo;
 }
 
 - (void)skipRight:(Float32)seconds {
