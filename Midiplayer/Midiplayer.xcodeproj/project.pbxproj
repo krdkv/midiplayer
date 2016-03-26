@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		2D6D1D911CA57A8300ADE11A /* Bach Inv No 8.mid in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D8F1CA57A8300ADE11A /* Bach Inv No 8.mid */; };
 		2D6D1D951CA5AB3200ADE11A /* MidiPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D1D941CA5AB3200ADE11A /* MidiPlayer.m */; };
+		2D6D1DA81CA716F400ADE11A /* C0.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D9B1CA716F400ADE11A /* C0.caf */; };
+		2D6D1DA91CA716F400ADE11A /* C1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D9C1CA716F400ADE11A /* C1.caf */; };
+		2D6D1DAA1CA716F400ADE11A /* C2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D9D1CA716F400ADE11A /* C2.caf */; };
+		2D6D1DAB1CA716F400ADE11A /* C3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D9E1CA716F400ADE11A /* C3.caf */; };
+		2D6D1DAC1CA716F400ADE11A /* C4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1D9F1CA716F400ADE11A /* C4.caf */; };
+		2D6D1DAD1CA716F400ADE11A /* C5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA01CA716F400ADE11A /* C5.caf */; };
+		2D6D1DAE1CA716F400ADE11A /* F#0.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA11CA716F400ADE11A /* F#0.caf */; };
+		2D6D1DAF1CA716F400ADE11A /* F#1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA21CA716F400ADE11A /* F#1.caf */; };
+		2D6D1DB01CA716F400ADE11A /* F#2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA31CA716F400ADE11A /* F#2.caf */; };
+		2D6D1DB11CA716F400ADE11A /* F#3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA41CA716F400ADE11A /* F#3.caf */; };
+		2D6D1DB21CA716F400ADE11A /* F#4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA51CA716F400ADE11A /* F#4.caf */; };
+		2D6D1DB31CA716F400ADE11A /* F#5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA61CA716F400ADE11A /* F#5.caf */; };
+		2D6D1DB41CA716F400ADE11A /* HPiano.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D1DA71CA716F400ADE11A /* HPiano.aupreset */; };
 		2D9512B11CA55E0B004CD162 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9512B01CA55E0B004CD162 /* AppDelegate.swift */; };
 		2D9512B31CA55E0B004CD162 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9512B21CA55E0B004CD162 /* ViewController.swift */; };
 		2D9512B61CA55E0B004CD162 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9512B41CA55E0B004CD162 /* Main.storyboard */; };
@@ -21,6 +34,19 @@
 		2D6D1D921CA5AB3200ADE11A /* Midiplayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Midiplayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D6D1D931CA5AB3200ADE11A /* MidiPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiPlayer.h; sourceTree = "<group>"; };
 		2D6D1D941CA5AB3200ADE11A /* MidiPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MidiPlayer.m; sourceTree = "<group>"; };
+		2D6D1D9B1CA716F400ADE11A /* C0.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = C0.caf; sourceTree = "<group>"; };
+		2D6D1D9C1CA716F400ADE11A /* C1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = C1.caf; sourceTree = "<group>"; };
+		2D6D1D9D1CA716F400ADE11A /* C2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = C2.caf; sourceTree = "<group>"; };
+		2D6D1D9E1CA716F400ADE11A /* C3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = C3.caf; sourceTree = "<group>"; };
+		2D6D1D9F1CA716F400ADE11A /* C4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4.caf; sourceTree = "<group>"; };
+		2D6D1DA01CA716F400ADE11A /* C5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = C5.caf; sourceTree = "<group>"; };
+		2D6D1DA11CA716F400ADE11A /* F#0.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F#0.caf"; sourceTree = "<group>"; };
+		2D6D1DA21CA716F400ADE11A /* F#1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F#1.caf"; sourceTree = "<group>"; };
+		2D6D1DA31CA716F400ADE11A /* F#2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F#2.caf"; sourceTree = "<group>"; };
+		2D6D1DA41CA716F400ADE11A /* F#3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F#3.caf"; sourceTree = "<group>"; };
+		2D6D1DA51CA716F400ADE11A /* F#4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F#4.caf"; sourceTree = "<group>"; };
+		2D6D1DA61CA716F400ADE11A /* F#5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F#5.caf"; sourceTree = "<group>"; };
+		2D6D1DA71CA716F400ADE11A /* HPiano.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HPiano.aupreset; sourceTree = "<group>"; };
 		2D9512AD1CA55E0B004CD162 /* Midiplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Midiplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9512B01CA55E0B004CD162 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D9512B21CA55E0B004CD162 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +70,19 @@
 		2D6D1D8E1CA57A8300ADE11A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D6D1D9B1CA716F400ADE11A /* C0.caf */,
+				2D6D1D9C1CA716F400ADE11A /* C1.caf */,
+				2D6D1D9D1CA716F400ADE11A /* C2.caf */,
+				2D6D1D9E1CA716F400ADE11A /* C3.caf */,
+				2D6D1D9F1CA716F400ADE11A /* C4.caf */,
+				2D6D1DA01CA716F400ADE11A /* C5.caf */,
+				2D6D1DA11CA716F400ADE11A /* F#0.caf */,
+				2D6D1DA21CA716F400ADE11A /* F#1.caf */,
+				2D6D1DA31CA716F400ADE11A /* F#2.caf */,
+				2D6D1DA41CA716F400ADE11A /* F#3.caf */,
+				2D6D1DA51CA716F400ADE11A /* F#4.caf */,
+				2D6D1DA61CA716F400ADE11A /* F#5.caf */,
+				2D6D1DA71CA716F400ADE11A /* HPiano.aupreset */,
 				2D6D1D8F1CA57A8300ADE11A /* Bach Inv No 8.mid */,
 			);
 			path = Resources;
@@ -141,8 +180,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D6D1DAD1CA716F400ADE11A /* C5.caf in Resources */,
+				2D6D1DAA1CA716F400ADE11A /* C2.caf in Resources */,
+				2D6D1DA81CA716F400ADE11A /* C0.caf in Resources */,
+				2D6D1DB21CA716F400ADE11A /* F#4.caf in Resources */,
+				2D6D1DAC1CA716F400ADE11A /* C4.caf in Resources */,
 				2D9512BB1CA55E0B004CD162 /* LaunchScreen.storyboard in Resources */,
+				2D6D1DAE1CA716F400ADE11A /* F#0.caf in Resources */,
+				2D6D1DA91CA716F400ADE11A /* C1.caf in Resources */,
+				2D6D1DAB1CA716F400ADE11A /* C3.caf in Resources */,
+				2D6D1DB01CA716F400ADE11A /* F#2.caf in Resources */,
+				2D6D1DB11CA716F400ADE11A /* F#3.caf in Resources */,
 				2D6D1D911CA57A8300ADE11A /* Bach Inv No 8.mid in Resources */,
+				2D6D1DAF1CA716F400ADE11A /* F#1.caf in Resources */,
+				2D6D1DB31CA716F400ADE11A /* F#5.caf in Resources */,
+				2D6D1DB41CA716F400ADE11A /* HPiano.aupreset in Resources */,
 				2D9512B81CA55E0B004CD162 /* Assets.xcassets in Resources */,
 				2D9512B61CA55E0B004CD162 /* Main.storyboard in Resources */,
 			);

@@ -29,6 +29,7 @@
     if (self) {
         [self setupAudioSession];
         [self setupGraph];
+        [self loadSampleMaps];
     }
     return self;
 }
@@ -103,36 +104,31 @@
     return isRunning;
 }
 
-//- (void) loadSampleMaps {
-//    
-//    for ( int i = 0; i < kMapNames.count; ++i ) {
-//        NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:kMapNames[i] ofType:@"aupreset"]];
-//        NSAssert(presetURL, @"Could not load preset: %@", kMapNames[i]);
-//        [self loadMapForUrl:presetURL andUnit:_samplerUnits[i]];
-//    }
-//}
-//
-//- (void) loadMapForUrl:(NSURL*)url andUnit:(AudioUnit)unit {
-//    NSError * error;
-//    
-//    // Read from the URL and convert into a CFData chunk
-//    NSData * data = [NSData dataWithContentsOfURL:url
-//                                          options:0
-//                                            error:&error];
-//   	NSAssert(!error, @"Can't read data");
-//    
-//    CFPropertyListRef presetPropertyList = 0;
-//    CFPropertyListFormat dataFormat = 0;
-//    CFErrorRef errorRef = 0;
-//    presetPropertyList = CFPropertyListCreateWithData (kCFAllocatorDefault, (__bridge CFDataRef)(data), kCFPropertyListImmutable, &dataFormat, &errorRef);
-//    
-//    if (presetPropertyList != 0) {
-//        
-//        AudioUnitSetProperty(unit, kAudioUnitProperty_ClassInfo, kAudioUnitScope_Global, 0, &presetPropertyList, sizeof(CFPropertyListRef) );
-//        
-//        CFRelease(presetPropertyList);
-//    }
-//}
+- (void) loadSampleMaps {
+    NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"HPiano" ofType:@"aupreset"]];
+    [self loadMapForUrl:presetURL andUnit:leftUnit];
+    [self loadMapForUrl:presetURL andUnit:rightUnit];
+}
+
+- (void) loadMapForUrl:(NSURL*)url andUnit:(AudioUnit)unit {
+    NSError * error;
+    
+    NSData * data = [NSData dataWithContentsOfURL:url
+                                          options:0
+                                            error:&error];
+    
+    CFPropertyListRef presetPropertyList = 0;
+    CFPropertyListFormat dataFormat = 0;
+    CFErrorRef errorRef = 0;
+    presetPropertyList = CFPropertyListCreateWithData (kCFAllocatorDefault, (__bridge CFDataRef)(data), kCFPropertyListImmutable, &dataFormat, &errorRef);
+    
+    if (presetPropertyList != 0) {
+        
+        AudioUnitSetProperty(unit, kAudioUnitProperty_ClassInfo, kAudioUnitScope_Global, 0, &presetPropertyList, sizeof(CFPropertyListRef) );
+        
+        CFRelease(presetPropertyList);
+    }
+}
 
 - (void)loadMidiData:(NSData*)data {
     
