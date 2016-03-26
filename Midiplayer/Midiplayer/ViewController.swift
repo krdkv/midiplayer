@@ -12,19 +12,12 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
-    private var musicPlayer:MusicPlayer = nil
-    private var musicSequence:MusicSequence = nil
+    var midiPlayer:MidiPlayer = MidiPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        
-        
-        
-        
-//        NSString *midiFilePath = [[NSBundle mainBundle] pathForResource:name ofType:@"mid"];
-//        NSURL * midiFileURL = [NSURL fileURLWithPath:midiFilePath];
         
     }
 

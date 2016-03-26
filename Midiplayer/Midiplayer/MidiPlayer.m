@@ -9,6 +9,17 @@
 #import "MidiPlayer.h"
 #import <CoreMidi/CoreMidi.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+
+#define kPrefferedMaximumFramesPerSlice 4096
+
+@interface MidiPlayer() {
+    AUGraph graph;
+    AudioUnit leftUnit, rightUnit, metronomeUnit, mixerUnit, rioUnit;
+    
+}
+
+@end
 
 @implementation MidiPlayer
 
@@ -16,9 +27,187 @@
 {
     self = [super init];
     if (self) {
-        
+        [self setupAudioSession];
+        [self setupGraph];
     }
     return self;
+}
+
+- (void)setupAudioSession {
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+}
+
+- (void)setupGraph {
+    OSStatus result = noErr;
+    AUNode leftNode, rightNode, metronomeNode, mixerNode, rioNode;
+    
+    AudioComponentDescription cd = {};
+    cd.componentManufacturer     = kAudioUnitManufacturer_Apple;
+    cd.componentFlags            = 0;
+    cd.componentFlagsMask        = 0;
+    
+    NewAUGraph (&graph);
+    
+    cd.componentType = kAudioUnitType_MusicDevice;
+    cd.componentSubType = kAudioUnitSubType_Sampler;
+    
+    AUGraphAddNode (graph, &cd, &leftNode);
+    AUGraphAddNode (graph, &cd, &rightNode);
+    AUGraphAddNode (graph, &cd, &metronomeNode);
+    
+    cd.componentType = kAudioUnitType_Mixer;
+    cd.componentSubType = kAudioUnitSubType_MultiChannelMixer;
+    
+    result = AUGraphAddNode(graph, &cd, &mixerNode);
+    
+    cd.componentType = kAudioUnitType_Output;
+    cd.componentSubType = kAudioUnitSubType_RemoteIO;
+    
+    result = AUGraphAddNode (graph, &cd, &rioNode);
+    
+    AUGraphOpen(graph);
+    
+    AUGraphConnectNodeInput(graph, leftNode, 0, mixerNode, 0);
+    AUGraphConnectNodeInput(graph, rightNode, 0, mixerNode, 1);
+    AUGraphConnectNodeInput(graph, metronomeNode, 0, mixerNode, 2);
+    AUGraphConnectNodeInput(graph, mixerNode, 0, rioNode, 0);
+    
+    AUGraphNodeInfo(graph, leftNode, 0, &leftUnit);
+    AUGraphNodeInfo(graph, rightNode, 0, &rightUnit);
+    AUGraphNodeInfo(graph, metronomeNode, 0, &metronomeUnit);
+    AUGraphNodeInfo(graph, mixerNode, 0, &mixerUnit);
+    AUGraphNodeInfo(graph, rioNode, 0, &rioUnit);
+    
+    UInt32 maximumFramesPerSlice = kPrefferedMaximumFramesPerSlice;
+    
+    AudioUnitSetProperty (leftUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maximumFramesPerSlice, sizeof (maximumFramesPerSlice));
+    AudioUnitSetProperty (rightUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maximumFramesPerSlice, sizeof (maximumFramesPerSlice));
+    AudioUnitSetProperty (metronomeUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maximumFramesPerSlice, sizeof (maximumFramesPerSlice));
+    AudioUnitSetProperty (mixerUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maximumFramesPerSlice, sizeof (maximumFramesPerSlice));
+    AudioUnitSetProperty (rioUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maximumFramesPerSlice, sizeof (maximumFramesPerSlice));
+    
+    AUGraphInitialize(graph);
+}
+
+- (void)play {
+    AUGraphStart(graph);
+}
+
+- (void)pause {
+    AUGraphStop(graph);
+}
+
+- (BOOL)isPlaying {
+    Boolean isRunning = false;
+    AUGraphIsRunning(graph, &isRunning);
+    return isRunning;
+}
+
+//- (void) loadSampleMaps {
+//    
+//    for ( int i = 0; i < kMapNames.count; ++i ) {
+//        NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:kMapNames[i] ofType:@"aupreset"]];
+//        NSAssert(presetURL, @"Could not load preset: %@", kMapNames[i]);
+//        [self loadMapForUrl:presetURL andUnit:_samplerUnits[i]];
+//    }
+//}
+//
+//- (void) loadMapForUrl:(NSURL*)url andUnit:(AudioUnit)unit {
+//    NSError * error;
+//    
+//    // Read from the URL and convert into a CFData chunk
+//    NSData * data = [NSData dataWithContentsOfURL:url
+//                                          options:0
+//                                            error:&error];
+//   	NSAssert(!error, @"Can't read data");
+//    
+//    CFPropertyListRef presetPropertyList = 0;
+//    CFPropertyListFormat dataFormat = 0;
+//    CFErrorRef errorRef = 0;
+//    presetPropertyList = CFPropertyListCreateWithData (kCFAllocatorDefault, (__bridge CFDataRef)(data), kCFPropertyListImmutable, &dataFormat, &errorRef);
+//    
+//    if (presetPropertyList != 0) {
+//        
+//        AudioUnitSetProperty(unit, kAudioUnitProperty_ClassInfo, kAudioUnitScope_Global, 0, &presetPropertyList, sizeof(CFPropertyListRef) );
+//        
+//        CFRelease(presetPropertyList);
+//    }
+//}
+
+- (void)loadMidiData:(NSData*)data {
+    
+}
+
+- (Float32)leftHandVolume {
+    Float32 volume;
+    UInt32 size = sizeof(volume);
+    OSStatus status = AudioUnitGetProperty(mixerUnit, kMultiChannelMixerParam_Volume, kAudioUnitScope_Input, 0, &volume, &size);
+    
+    if ( status != noErr ) {
+        return 0.5f;
+    }
+    return volume;
+}
+
+- (Float32)rightHandVolume {
+    Float32 volume;
+    UInt32 size = sizeof(volume);
+    OSStatus status = AudioUnitGetProperty(mixerUnit, kMultiChannelMixerParam_Volume, kAudioUnitScope_Input, 1, &volume, &size);
+    
+    if ( status != noErr ) {
+        return 0.5f;
+    }
+    return volume;
+}
+
+- (Float32)metronomeVolume {
+    Float32 volume;
+    UInt32 size = sizeof(volume);
+    OSStatus status = AudioUnitGetProperty(mixerUnit, kMultiChannelMixerParam_Volume, kAudioUnitScope_Input, 2, &volume, &size);
+    
+    if ( status != noErr ) {
+        return 0.5f;
+    }
+    return volume;
+}
+
+- (void)setLeftHandVolume:(Float32)leftHandVolume {
+    AudioUnitSetParameter(mixerUnit, kMultiChannelMixerParam_Volume,
+                          kAudioUnitScope_Input, 0, leftHandVolume, 0);
+}
+
+- (void)setRightHandVolume:(Float32)rightHandVolume {
+    AudioUnitSetParameter(mixerUnit, kMultiChannelMixerParam_Volume,
+                          kAudioUnitScope_Input, 1, rightHandVolume, 0);
+}
+
+- (void)setMetronomeVolume:(Float32)metronomeVolume {
+    AudioUnitSetParameter(metronomeUnit, kMultiChannelMixerParam_Volume,
+                          kAudioUnitScope_Input, 2, metronomeVolume, 0);
+}
+
+- (UInt32)tempo {
+    return 120;
+}
+
+- (void)setTempo:(UInt32)tempo {
+    
+}
+
+- (void)skipRight:(Float32)seconds {
+    
+}
+
+- (void)skipLeft:(Float32)seconds {
+    
+}
+
+- (void)setLoopBegin:(BOOL)enabled {
+    
+}
+
+- (void)setLoopEnd:(BOOL)enabled {
+    
 }
 
 @end
