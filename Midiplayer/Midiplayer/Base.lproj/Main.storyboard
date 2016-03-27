@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10084"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,8 +17,59 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="giF-oM-ojo">
+                                <rect key="frame" x="25" y="65" width="118" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="OIL-fk-e9V"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="leftVolumeChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="nBp-Yw-KKD"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Q54-as-Jzb">
+                                <rect key="frame" x="25" y="157" width="118" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="lQK-jZ-fSG"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="rightVolumeChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="GIV-Ih-adb"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="k0N-Dl-u0Q">
+                                <rect key="frame" x="25" y="262" width="118" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="eih-ds-Qlr"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="tempoChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="u4N-16-HVe"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOA-Fj-5Xd">
+                                <rect key="frame" x="174" y="266" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q54-as-Jzb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="7" id="1IX-nN-jJg"/>
+                            <constraint firstItem="Q54-as-Jzb" firstAttribute="top" secondItem="giF-oM-ojo" secondAttribute="bottom" constant="62" id="2oS-wg-FPw"/>
+                            <constraint firstItem="aOA-Fj-5Xd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="246" id="2oz-0d-R2A"/>
+                            <constraint firstItem="k0N-Dl-u0Q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="7" id="EEv-Aq-L0a"/>
+                            <constraint firstItem="giF-oM-ojo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="7" id="QSz-us-hZd"/>
+                            <constraint firstItem="giF-oM-ojo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="W3w-JB-nRG"/>
+                            <constraint firstItem="aOA-Fj-5Xd" firstAttribute="leading" secondItem="k0N-Dl-u0Q" secondAttribute="trailing" constant="33" id="Wh2-kc-fs0"/>
+                            <constraint firstItem="k0N-Dl-u0Q" firstAttribute="top" secondItem="Q54-as-Jzb" secondAttribute="bottom" constant="75" id="kpI-Kt-Fmz"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="leftVolumeSlider" destination="giF-oM-ojo" id="Vxp-lF-4kP"/>
+                        <outlet property="rightVolumeSlider" destination="Q54-as-Jzb" id="amJ-7b-BoK"/>
+                        <outlet property="tempoLabel" destination="aOA-Fj-5Xd" id="UJl-QJ-Wd5"/>
+                        <outlet property="tempoSlider" destination="k0N-Dl-u0Q" id="goJ-oY-ayj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

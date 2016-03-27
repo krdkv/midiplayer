@@ -12,6 +12,11 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var leftVolumeSlider:UISlider?
+    @IBOutlet weak var rightVolumeSlider:UISlider?
+    @IBOutlet weak var tempoSlider:UISlider?
+    @IBOutlet weak var tempoLabel:UILabel?
+    
     var midiPlayer:MidiPlayer = MidiPlayer()
     
     override func viewDidLoad() {
@@ -21,16 +26,29 @@ class ViewController: UIViewController {
             let data = NSFileManager.defaultManager().contentsAtPath(midURL)
             midiPlayer.loadMidiData(data)
             
-            midiPlayer.tempo = 280
+            tempoSlider?.continuous = false
+            tempoLabel?.text = "\(midiPlayer.tempo)"
+            tempoSlider?.value = Float(midiPlayer.tempo)
+            
+            leftVolumeSlider?.value = midiPlayer.leftHandVolume
+            rightVolumeSlider?.value = midiPlayer.rightHandVolume
             
             midiPlayer.play()
-        }
-        
-        
+        }                
     }
     
-    func tick() {
-        midiPlayer.tempo = 30
+    @IBAction func leftVolumeChange(slider:UISlider) {
+        midiPlayer.leftHandVolume = slider.value
     }
+    
+    @IBAction func rightVolumeChange(slider:UISlider) {
+        midiPlayer.rightHandVolume = slider.value
+    }
+    
+    @IBAction func tempoChange(slider:UISlider) {
+        midiPlayer.tempo = UInt32(slider.value)
+        tempoLabel?.text = "\(midiPlayer.tempo)"
+    }
+    
 }
 
