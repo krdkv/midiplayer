@@ -108,9 +108,12 @@
 }
 
 - (BOOL)isPlaying {
-    Boolean isRunning = false;
-    AUGraphIsRunning(graph, &isRunning);
-    return isRunning;
+    if ( musicPlayer ) {
+        Boolean isRunning;
+        MusicPlayerIsPlaying(musicPlayer, &isRunning);
+        return isRunning;
+    }
+    return NO;
 }
 
 - (void) loadSampleMaps {
@@ -174,7 +177,7 @@
     MusicTrackSetDestNode(leftTrack, leftNode);
     MusicTrackSetDestNode(rightTrack, rightNode);
     
-    MusicPlayerStart(musicPlayer);
+    MusicPlayerPreroll(musicPlayer);
 }
 
 - (void)removeTempoEvents:(MusicTrack)track {
@@ -254,6 +257,11 @@
 }
 
 - (void)setTempo:(UInt32)tempo {
+    
+    if (tempo <= 0) {
+        return;
+    }
+    
     MusicTrack tempoTrack;
     MusicSequenceGetTempoTrack(musicSequence, &tempoTrack);
     [self removeTempoEvents:tempoTrack];

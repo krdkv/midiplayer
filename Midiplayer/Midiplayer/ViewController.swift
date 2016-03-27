@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var rightVolumeSlider:UISlider?
     @IBOutlet weak var tempoSlider:UISlider?
     @IBOutlet weak var tempoLabel:UILabel?
+    @IBOutlet weak var playButton:UIButton?
     
     var midiPlayer:MidiPlayer = MidiPlayer()
     
@@ -33,7 +34,7 @@ class ViewController: UIViewController {
             leftVolumeSlider?.value = midiPlayer.leftHandVolume
             rightVolumeSlider?.value = midiPlayer.rightHandVolume
             
-            midiPlayer.play()
+            playButton?.setTitle("Play", forState: UIControlState.Normal)
         }                
     }
     
@@ -48,6 +49,18 @@ class ViewController: UIViewController {
     @IBAction func tempoChange(slider:UISlider) {
         midiPlayer.tempo = UInt32(slider.value)
         tempoLabel?.text = "\(midiPlayer.tempo)"
+    }
+    
+    @IBAction func playButton(button:UIButton) {
+        button.selected = !button.selected
+        
+        if ( button.selected ) {
+            playButton?.setTitle("Pause", forState: UIControlState.Normal)
+            midiPlayer.play()
+        } else {
+            playButton?.setTitle("Play", forState: UIControlState.Normal)
+            midiPlayer.pause()
+        }
     }
     
 }

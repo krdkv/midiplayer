@@ -51,21 +51,31 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kab-HW-Xv3">
+                                <rect key="frame" x="217" y="342" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="playButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ytA-ZM-M4k"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Q54-as-Jzb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="7" id="1IX-nN-jJg"/>
                             <constraint firstItem="Q54-as-Jzb" firstAttribute="top" secondItem="giF-oM-ojo" secondAttribute="bottom" constant="62" id="2oS-wg-FPw"/>
                             <constraint firstItem="aOA-Fj-5Xd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="246" id="2oz-0d-R2A"/>
+                            <constraint firstItem="kab-HW-Xv3" firstAttribute="top" secondItem="k0N-Dl-u0Q" secondAttribute="bottom" constant="50" id="9R2-Oi-QQb"/>
                             <constraint firstItem="k0N-Dl-u0Q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="7" id="EEv-Aq-L0a"/>
                             <constraint firstItem="giF-oM-ojo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="7" id="QSz-us-hZd"/>
                             <constraint firstItem="giF-oM-ojo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="W3w-JB-nRG"/>
                             <constraint firstItem="aOA-Fj-5Xd" firstAttribute="leading" secondItem="k0N-Dl-u0Q" secondAttribute="trailing" constant="33" id="Wh2-kc-fs0"/>
+                            <constraint firstItem="kab-HW-Xv3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="197" id="bKl-SL-Ibu"/>
                             <constraint firstItem="k0N-Dl-u0Q" firstAttribute="top" secondItem="Q54-as-Jzb" secondAttribute="bottom" constant="75" id="kpI-Kt-Fmz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="leftVolumeSlider" destination="giF-oM-ojo" id="Vxp-lF-4kP"/>
+                        <outlet property="playButton" destination="kab-HW-Xv3" id="U6G-zR-gNf"/>
                         <outlet property="rightVolumeSlider" destination="Q54-as-Jzb" id="amJ-7b-BoK"/>
                         <outlet property="tempoLabel" destination="aOA-Fj-5Xd" id="UJl-QJ-Wd5"/>
                         <outlet property="tempoSlider" destination="k0N-Dl-u0Q" id="goJ-oY-ayj"/>
